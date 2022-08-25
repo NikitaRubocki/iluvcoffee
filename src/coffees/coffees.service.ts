@@ -1,15 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService, ConfigType } from '@nestjs/config';
+import coffeesConfig from './config/coffees.config';
 import { Coffee } from './entities/coffee.entity';
 
 @Injectable()
 export class CoffeesService {
 
 	constructor(
-		private readonly configService: ConfigService,
+		@Inject(coffeesConfig.KEY)
+		private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
 	) {
-		const databaseHost = this.configService.get<string>('DATABASE_HOST');
-		console.log(`CoffeesService: databaseHost = ${databaseHost}`);
+		console.log(coffeesConfiguration.foo);
 	}
 
 	private coffees: Coffee[] = [
