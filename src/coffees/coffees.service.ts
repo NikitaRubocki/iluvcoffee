@@ -1,8 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Coffee } from './entities/coffee.entity';
 
 @Injectable()
 export class CoffeesService {
+
+	constructor(
+		private readonly configService: ConfigService,
+	) {
+		const databaseHost = this.configService.get<string>('DATABASE_HOST');
+		console.log(`CoffeesService: databaseHost = ${databaseHost}`);
+	}
+
 	private coffees: Coffee[] = [
 		{
 			id: 1,
