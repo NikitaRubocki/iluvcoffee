@@ -19,6 +19,7 @@ import * as Joi from '@hapi/joi';
     CoffeeRatingModule,
     CommonModule,
     // database info would go here if we were using a database
+    //adding this for a test of gps
   ],
   controllers: [AppController],
   providers: [AppService],
